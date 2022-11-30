@@ -1,6 +1,7 @@
 # Timer Pomodoro
 
 #### O timer pomodoro é um app que une a técnica de Pomodoro com a realização de exercícios físicos para quem passa muito tempo na frente do computador.
+![Captura de tela 2022-11-30 200734](https://user-images.githubusercontent.com/111262681/204927456-9c80569b-8eae-4951-97e5-f1d5bc81230c.png)
 
 <h3>Pré-requisitos</h3>
 <p>
