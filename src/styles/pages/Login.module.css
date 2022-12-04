@@ -1,0 +1,101 @@
+.body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  width: 100vw;
+  height: 100vh;
+
+  background-color: var(--blue-dark);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  width: 40%;
+  height: 80%;
+
+  gap: 3rem;
+  padding: 0 4rem;
+  background-color: var(--background);
+  border-radius: 10px;
+}
+
+.container > img {
+  width: 20rem;
+  margin: 4rem 0;
+}
+
+.container h1 {
+  font-size: 1.5rem;
+  color: var(--title);
+}
+
+.text {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.text img {
+  width: 2rem;
+}
+
+.text span {
+  font-size: 1.25rem;
+}
+
+.form {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.form input {
+  width: 16rem;
+  height: 3.5rem;
+
+  padding: 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--blue);
+  color: var(--white);
+  outline: auto;
+}
+
+.form input::placeholder {
+  color: var(--white)
+}
+
+
+.form a{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 3.5rem;
+  height: 3.5rem;
+
+  padding: 1rem;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  background-color: var(--blue);
+  color: var(--white);
+}
+
+.form a button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  background-color: var(--blue);
+}
+
+
+.form a img {
+  width: 2rem;
+  height: 2rem;
+}

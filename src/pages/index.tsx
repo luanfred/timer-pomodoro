@@ -1,63 +1,47 @@
-import Head from 'next/head'
-import { GetServerSideProps } from 'next'
-import { ChallengeBox } from '../components/ChallengeBox'
-import { CompletendChallenges } from '../components/CompletendChallenges'
-import { Countdown } from '../components/Countdown'
-import { Experiencebar } from '../components/Experiencebar'
-import { Profile } from '../components/Profile'
-import { CountdownProvider } from '../context/CountdownContext'
+import Head from 'next/head';
+import Link from 'next/link'
+import { useContext, useState } from 'react'
+import { UserProfileContext } from '../context/UserProfileContext';
+import styles from '../styles/pages/Login.module.css'
 
-import styles from '../styles/pages/Home.module.css'
-import { ChallengesProvider } from '../context/ChallengesContext'
-import { LevelUpModal } from '../components/LevelUpModal'
-
-type HomeProps = {
-  level: number;
-  currentExperience: number;
-  challengesCompleted: number;
+type ProfileResponse = {
+  name: string,
+  avatar_url: string,
 }
 
-export default function Home(props: HomeProps) {
+export default function login() {
+  const [nameLogin, setNameLogin] = useState('')
+  const { setName, setAvatar } = useContext(UserProfileContext)
 
-  return (
-    <ChallengesProvider
-      level={props.level}
-      currentExperience={props.currentExperience}
-      challengesCompleted={props.challengesCompleted}
-    >
-      <div className={styles.container}>
-        <Head>
-          <title>Início | move.it</title>
-        </Head>
-        <Experiencebar />
-        <CountdownProvider>
-          <section>
-            <div>
-              <Profile />
-              <CompletendChallenges />
-              <Countdown />
-            </div>
-            <div>
-              <ChallengeBox />
-            </div>
-          </section>
-        </CountdownProvider>
-      </div>
-    </ChallengesProvider>
-  )
-}
+  async function handleGetUserName() {
+    const res = await fetch(`https://api.github.com/users/${nameLogin}`)
+    const data = await res.json() as ProfileResponse
 
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-
-  const { level, currentExperience, challengesCompleted } = ctx.req.cookies;
-
-  return {
-    props: {
-      level: Number(level),
-      currentExperience: Number(currentExperience),
-      challengesCompleted: Number(challengesCompleted),
-    }
+    setName(data.name)
+    setAvatar(data.avatar_url)
   }
 
+  return (
+    <div className={styles.body}>
+      <Head>
+        <title>Login | move.it</title>
+      </Head>
+      <div className={styles.container}>
+        <img src="icons/Logo.svg" alt="logo" />
+        <h1>Bem-vindo</h1>
+        <div className={styles.text}>
+          <img src="icons/github-icon-1.svg" alt="" />
+          <span>Faça login com seu github para comerçar</span>
+        </div>
+        <form className={styles.form}>
+          <input type="text" placeholder='Digite seu username' onChange={(e) => setNameLogin(e.target.value)} />
+          <Link href="/home">
+            <button onClick={handleGetUserName}>
+              <img src="icons/seta-para-a-direita.svg" alt="seta" />
+            </button>
+          </Link>
+        </form>
+      </div>
+    </div>
+  )
 }
